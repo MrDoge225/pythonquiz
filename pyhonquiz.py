@@ -1,4 +1,6 @@
 import random
+from typing import Any, Union
+
 correct: str = '✓'
 wrong: str = 'X'
 
@@ -17,8 +19,9 @@ def mental_maths():
     else:
         print(wrong)
 
-    random_div = random.randrange(0, 12)
+    random_div_ans = random.randrange(0, 12)
     random_div_2 = random.randrange(0, 12)
+    random_div = random_div_2*random_div_ans
     print("2) Dividing: ")
     divide = int(input("What is {} / {}: ".format(random_div, random_div_2)))
     if divide == random_div / random_div_2:
@@ -27,8 +30,8 @@ def mental_maths():
     else:
         print(wrong)
 
-    random_add = random.randrange(0, 10000)
-    random_add_2 = random.randrange(0, 10000)
+    random_add = random.randrange(0, 1000)
+    random_add_2 = random.randrange(0, 1000)
     print("3) Adding: ")
     add = int(input("What is {} + {}: ".format(random_add, random_add_2)))
     if add == random_add + random_add_2:
@@ -37,11 +40,11 @@ def mental_maths():
     else:
         print(wrong)
 
-    random_sub = random.randrange(0, 10000)
-    random_sub_2 = random.randrange(0, 10000)
+    random_sub = random.randrange(0, 1000)
+    random_sub_2 = random.randrange(0, 1000)
     print("4) Subtracting: ")
-    divide = int(input("What is {} - {}: ".format(random_sub, random_sub_2)))
-    if divide == random_sub - random_sub_2:
+    subtraction = int(input("What is {} - {}: ".format(random_sub, random_sub_2)))
+    if subtraction == random_sub - random_sub_2:
         print(correct)
         mm = mm + 1
     else:
@@ -55,7 +58,7 @@ def written_maths():
     wm=0
     rand_mul = random.randrange(0, 100)
     rand_mul_2 = random.randrange(0, 100)
-    print("2) Dividing: ")
+    print("1) Multiplication: ")
     multi = int(input("What is {} * {}: ".format(rand_mul, rand_mul_2)))
     if multi == rand_mul * rand_mul_2:
         print(correct)
@@ -66,18 +69,42 @@ def written_maths():
     rand_div_ans = random.randrange(0, 100)
     rand_div_2 = random.randrange(0, 100)
     rand_div = rand_div_2*rand_div_ans
-    print("2) Dividing (put to the ): ")
-    multi = int(input("What is {} / {}: ".format(rand_div, rand_div_2)))
-    if multi == rand_div / rand_div_2:
+    print("2) Division: ")
+    div = int(input("What is {} / {}: ".format(rand_div, rand_div_2)))
+    if div == rand_div / rand_div_2:
         print(correct)
         wm=wm+1
     else:
         print(wrong)
 
+    rand_add = random.randrange(0, 10000)
+    rand_add_2 = random.randrange(0, 10000)
+    print("3) Addition: ")
+    add = int(input("What is {} + {}: ".format(rand_add, rand_add_2)))
+    if add == rand_add + rand_add_2:
+        print(correct)
+        wm=wm+1
+    else:
+        print(wrong)
+
+    rand_sub = random.randrange(0, 10000)
+    rand_sub_2 = random.randrange(0, 10000)
+    print("4) Subtraction: ")
+    sub = int(input("What is {} - {}: ".format(rand_mul, rand_mul_2)))
+    if sub == rand_sub - rand_sub_2:
+        print(correct)
+        wm=wm+1
+    else:
+        print(wrong)
+
+    wmperc = ((wm / 4) * 100)
+    print("Your percentage for working out maths is ", wmperc, '%')
+
 
 def maths():
     mental_maths()
     print()
+    print("Now for working out maths :)")
     written_maths()
 
 
