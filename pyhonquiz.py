@@ -1,23 +1,24 @@
 import random
-from typing import Any, Union
+
 
 correct: str = '✓'
 wrong: str = 'X'
 
 
 def mental_maths():
-    mm = 0
+    score = 0
     print('ONLY MENTAL MATHS!!!!!')
 
     random_mul = random.randrange(0, 15)
     random_mul_2 = random.randrange(0, 15)
     print("1) Multiplying: ")
     multiply = int(input("What is {} * {}: ".format(random_mul, random_mul_2)))
-    if multiply == random_mul * random_mul_2:
+    mul_correct_answer = random_mul * random_mul_2
+    if multiply == mul_correct_answer:
         print(correct)
-        mm = mm + 1
+        score = score + 1
     else:
-        print(wrong, " , the right answer was: ", random_mul - random_mul_2)
+        print(wrong, " , the right answer was: ", mul_correct_answer)
 
     random_div_ans = random.randrange(0, 12)
     random_div_2 = random.randrange(0, 12)
@@ -26,7 +27,7 @@ def mental_maths():
     divide = int(input("What is {} / {}: ".format(random_div, random_div_2)))
     if divide == random_div / random_div_2:
         print(correct)
-        mm = mm + 1
+        score = score + 1
     else:
         print(wrong, " , the right answer was: ", random_div_ans)
 
@@ -34,36 +35,37 @@ def mental_maths():
     random_add_2 = random.randrange(0, 1000)
     print("3) Adding: ")
     add = int(input("What is {} + {}: ".format(random_add, random_add_2)))
-    if add == random_add + random_add_2:
+    add_correct_answer = random_add + random_add_2
+    if add == add_correct_answer:
         print(correct)
-        mm = mm + 1
+        score = score + 1
     else:
-        print(wrong, " , the right answer was: ", random_add - random_add_2)
+        print(wrong, " , the right answer was: ", add_correct_answer)
 
     random_sub = random.randrange(0, 1000)
     random_sub_2 = random.randrange(0, 1000)
     print("4) Subtracting: ")
     subtraction = int(input("What is {} - {}: ".format(random_sub, random_sub_2)))
-    if subtraction == random_sub - random_sub_2:
+    sub_correct_answer = random_sub - random_sub_2
+    if subtraction == sub_correct_answer:
         print(correct)
-        mm = mm + 1
+        score = score + 1
     else:
-        print(wrong, " , the right answer was: ", random_sub - random_sub_2)
+        print(wrong, " , the right answer was: ", sub_correct_answer)
 
-    mmperc = ((mm / 4) * 100)
-    print("Your percentage for mental maths is ", mmperc, '%')
+    print_score("mental math", score, 4)
 
 
 def written_maths():
     print("YOU CAN USE PAPER NOW FOR WORKING OUT!!!")
-    wm = 0
+    score = 0
     rand_mul = random.randrange(0, 100)
     rand_mul_2 = random.randrange(0, 100)
     print("1) Multiplication: ")
     multi = int(input("What is {} * {}: ".format(rand_mul, rand_mul_2)))
     if multi == rand_mul * rand_mul_2:
         print(correct)
-        wm = wm + 1
+        score = score + 1
     else:
         print(wrong, " , the right answer was: ", rand_mul * rand_mul_2)
 
@@ -74,7 +76,7 @@ def written_maths():
     div = int(input("What is {} / {}: ".format(rand_div, rand_div_2)))
     if div == rand_div / rand_div_2:
         print(correct)
-        wm = wm + 1
+        score = score + 1
     else:
         print(wrong, " , the right answer was: ", rand_div_ans)
 
@@ -84,22 +86,21 @@ def written_maths():
     add = int(input("What is {} + {}: ".format(rand_add, rand_add_2)))
     if add == rand_add + rand_add_2:
         print(correct)
-        wm = wm + 1
+        score = score + 1
     else:
-        print(wrong, " , the right answer was: ", rand_add * rand_add_2)
+        print(wrong, " , the right answer was: ", rand_add + rand_add_2)
 
     rand_sub = random.randrange(0, 10000)
     rand_sub_2 = random.randrange(0, 10000)
     print("4) Subtraction: ")
-    sub = int(input("What is {} - {}: ".format(rand_mul, rand_mul_2)))
+    sub = int(input("What is {} - {}: ".format(rand_sub, rand_sub_2)))
     if sub == rand_sub - rand_sub_2:
         print(correct)
-        wm = wm + 1
+        score = score + 1
     else:
-        print(wrong, " , the right answer was: ", rand_sub * rand_sub_2)
+        print(wrong, " , the right answer was: ", rand_sub - rand_sub_2)
 
-    wmperc = ((wm / 4) * 100)
-    print("Your percentage for working out maths is ", wmperc, '%')
+    print_score("working out math", score, 4)
 
 
 def maths():
@@ -109,47 +110,100 @@ def maths():
     written_maths()
 
 
-def periodtable():
-    period = {}
-    period["H"] = "Hydrogen"
-    period["Na"] = "Sodium"
-    period["Mg"] = "Magnesium"
-    period["K"] = "Potassium"
-    period["Ra"] = "Radium"
-    period["Ti"] = "Titanium"
-    period["Fe"] = "Iron"
-    period["Ag"] = "Silver"
-    period["Cu"] = "Copper"
-    period["Co"] = "Cobalt"
-    period["Zn"] = "Zinc"
-    period["C"] = "Carbon"
-    period["N"] = "Nitrogen"
-    period["O"] = "Oxygen"
-    period["S"] = "Sulphur"
-    period["Al"] = "Aluminium"
-    period["Pd"] = "Palladium"
-    for i in range (0,15):
-        index = random.randrange(0, len(period))
-        element = list(period.keys())[index]
+def print_score(subject1: str, correct_answers: int, total_answers: int):
+    percentage = ((correct_answers / total_answers) * 100)
+    print("Your {} score is {}%.".format(subject1, percentage))
+
+
+def periodic_table():
+    # dictionary - curly brackets make a dictionary (key:value)
+    table = {"H": "Hydrogen", "Na": "Sodium", "Mg": "Magnesium", "K": "Potassium", "Ra": "Radium",
+                      "Ti": "Titanium",
+                      "Fe": "Iron", "Ag": "Silver", "Cu": "Copper", "Co": "Cobalt", "Zn": "Zinc", "C": "Carbon",
+                      "N": "Nitrogen", "O": "Oxygen", "S": "Sulphur", "Al": "Aluminium", "Pd": "Palladium"}
+    score = 0
+    questions = 15
+    for i in range(0, questions):
+        index = random.randrange(0, len(table))
+        element = list(table.keys())[index]
         h = input("What is '{}' in the periodic table? ".format(element))
-        if h == period[element]:
+        if h.lower() == table[element].lower():
             print(correct)
+            score = score + 1
         else:
             print(wrong)
+            print("The correct answer was '{}'".format(table[element]))
 
-def english():
-    nouns = [""]
+        # https://stackoverflow.com/questions/5844672/delete-an-element-from-a-dictionary
+        new_periodic_table = dict(table)
+        del new_periodic_table[element]
+        table = new_periodic_table
 
-print('The following quizes you will be tested on will be on different subjects.')
-print('Always after a question a tick or a cross will be shown.')
-print('This way you know if it is right or wrong.')
+    print_score("chemistry", score, questions)
+
+
+def synonyms():
+    def insufficient() -> bool:
+        syn = input("Insufficient: is it ... a)Unsatisfactory b)Angry c)Satisfactory : ")
+        is_correct = syn == "a"
+        print(correct if is_correct else wrong)
+        return is_correct
+
+    def hilarious() -> bool:
+        syn = input("Hilarious: is it ... a)Melancholy b)Unhappy c)Amusing : ")
+        is_correct = syn == "c"
+        print(correct if is_correct else wrong)
+        return is_correct
+
+    def embarrass() -> bool:
+        syn = input("Embarrass: is it ... a)Annoy b)Simplify c)Organise : ")
+        is_correct = syn == "a"
+        print(correct if is_correct else wrong)
+        return is_correct
+
+    def selective() -> bool:
+        syn = input("Selective: is it ... a)Careless b)Choosy c)Judicious : ")
+        is_correct = syn == "b" or "c"
+        print(correct if is_correct else wrong)
+        return is_correct
+
+    def abject() -> bool:
+        syn = input("Abject: is it ... a)Object b)Hopeless c)Fortunate : ")
+        is_correct = syn == "b"
+        print(correct if is_correct else wrong)
+        return is_correct
+
+    questions = [insufficient, hilarious, embarrass, selective, abject]
+    score = 0
+    total_questions = 3
+    for i in range(0, total_questions):
+        print("What is the synonym for:")
+
+        random_question = random.randrange(0, 4)
+
+        question = questions[random_question]
+        was_correct = question()
+        if was_correct:
+            score = score + 1
+
+    print_score("synonyms", score, total_questions)
+
+
+print('This following quiz you will be tested on different subjects')
 print('At the end of the subject there will be a percentage of right answers which you answered.')
 print('This is all from me... enjoy :)')
-select = input('Pick a subject to be tested on: a) Maths, b) Periodic table, c) ')
-if select == "a":
-    maths()
-if select == "b":
-    periodtable()
 
-if select == "c":
-    english()
+while True:
+    subject = input('Pick a subject to be tested on: a) Maths, b) Periodic table, c) Synonyms ')
+    if subject.lower() == "a":
+        maths()
+    elif subject.lower() == "b":
+        periodic_table()
+    elif subject.lower() == "c":
+        synonyms()
+    else:
+        print("I do not know what you mean by '{}', please try again.".format(subject))
+
+    answer = input("Do you want to continue? (yes/no) ")
+    if answer.lower() == "no":
+        break
